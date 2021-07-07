@@ -1,0 +1,53 @@
+spring:
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/dev-saral"
+    username: "rid001s"
+    password: "aDM1n12e4s6"
+    driver-class-name: "org.postgresql.Driver"
+
+# HikariCP
+  hikari:
+    # This property controls the maximum size that the pool is allowed to reach,
+    # including both idle and in-use connections.
+    # Basically this value will determine the maximum number of actual connections to the database backend.
+    # Default: 10.
+    maximum-pool-size: 5
+
+    # Minimum number of idle connections that HikariCP tries to maintain in the pool.
+    # If the idle connections dip below this value, HikariCP will make a best effort
+    # to add additional connections quickly and efficiently. Default: same as maximumPoolSize.
+    #minimum-idle: 5
+
+    # This property controls the maximum lifetime of a connection in the pool.
+    # A value of 0 indicates no maximum lifetime (infinite lifetime).
+    # Default: 1800000
+    max-lifetime: 60000
+
+    # This property controls the maximum amount of time (in milliseconds) that a
+    # connection is allowed to sit idle in the pool.
+    # Default: 600000
+    #idle-timeout: 10
+
+    # This property represents a user-defined name for the connection pool and appears mainly in logging
+    # and JMX management consoles to identify pools and pool configurations.
+    # Default: Auto-generated
+    pool-name: "jdbc-demo"
+
+    # This property controls the amount of time that a connection can be out of the pool before a message is
+    # logged indicating a possible connection leak. A value of 0 means leak detection is disabled,
+    # minimum accepted value is 2000 (ms). ( ps: it's rarely needed option, use only for debugging )
+    # Default: 0
+    leak-detection-threshold: 2000
+
+    data-source-properties:
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqLimit: 2048
+
+
+

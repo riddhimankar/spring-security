@@ -1,4 +1,33 @@
+server:
+  port: 9001
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework:
+        web: INFO
+        security: INFO
+        security.oauth2: INFO
+
+security:
+    jksUri:
+    publicKey:
+    secretKey: "1234"
+    introspectUri:
+    client:
+      Id:
+      secret:
+    # Options are "jwt" or "opaque"
+    tokenType: "jwt"
+    # Options are "secret", "publicKey" or "keySet"
+    jwtDecoder: "secret"
+
 spring:
+  application:
+    name: "Account Service"
+  mvc:
+    log-request-details: true
   jpa:
     generate-ddl: false
     hibernate:

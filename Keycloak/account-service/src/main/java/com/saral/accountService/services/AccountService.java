@@ -9,13 +9,12 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class AccountService extends ResponseService<Response<List<AccountDto>>>{
@@ -26,11 +25,16 @@ public class AccountService extends ResponseService<Response<List<AccountDto>>>{
     @Override
     public Response<List<AccountDto>> handle() throws Exception {
 
-        var user = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        Iterable<Account> accounts = Optional.ofNullable(
-                accountRepo.findAllById(List.of(user))).orElseThrow(
-                () -> new NotFoundException("user not found"));
+        var authentication = (JwtAuthenticationToken) SecurityContextHolder
+                .getContext()
+                .getAuthentication();
+
+        String user = (String) authentication.getTokenAttributes().get("user_name");
+
+        Iterable<Account> accounts = Optional
+                .ofNullable(accountRepo.findAllById(List.of(user)))
+                .orElseThrow(() -> new NotFoundException("user not found"));
 
         List<AccountDto> accountDtos = new ArrayList<>();
 

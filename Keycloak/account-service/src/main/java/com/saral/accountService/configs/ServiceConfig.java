@@ -34,6 +34,9 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
     @Value("${security.jwtDecoder}")
     private String jwtDecoder;
 
+    @Value("${security.issuerUri}")
+    private String issuerUri;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -45,7 +48,10 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
             jwtTokenAuthentication(http);
         }
 
-        http.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests()
+            .mvcMatchers("/accounts")
+            .hasAuthority("SCOPE_read")
+            .anyRequest().authenticated();
     }
 
     /** Implementation of the Opaque token
@@ -54,7 +60,7 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
      */
     private void opaqueTokenAuthentication(HttpSecurity http) throws Exception {
         http.oauth2ResourceServer(
-                c -> c.opaqueToken(
+                oauth2 -> oauth2.opaqueToken(
                         t -> {
                             t.introspectionUri(introspectUri);
                             t.introspectionClientCredentials(clientId, clientSecret);
@@ -70,15 +76,15 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
      */
     private void jwtTokenAuthentication(HttpSecurity http) throws Exception {
         http.oauth2ResourceServer(
-                c -> c.jwt(
-                        j -> j.decoder(decoder())
+                oauth2 -> oauth2.jwt(
+                        jwt -> jwt.decoder(decoder())
                 )
         );
     }
 
     @Bean
     public JwtDecoder decoder() {
-        return JwtDecoderFactory.getDecoder(jwtDecoder, secretKey, publicKey, jksUri);
+        return JwtDecoderFactory.getDecoder(jwtDecoder, secretKey, publicKey, jksUri, issuerUri);
     }
 
 

@@ -34,9 +34,9 @@ spring:
       ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: "jdbc:postgresql://localhost:5432/dev-saral"
-    username: "rid001s"
-    password: "aDM1n12e4s6"
+    url: "jdbc:postgresql://localhost:5432/dev-test"
+    username: "d001s"
+    password: "ews1246"
     driver-class-name: "org.postgresql.Driver"
 
 # HikariCP

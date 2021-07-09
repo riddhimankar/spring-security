@@ -1,0 +1,20 @@
+server:
+  port: 8001
+
+keycloak:
+  enabled: true
+  realm: saral
+  auth-server-url: http://127.0.0.1:8180/auth
+  ssl-required: none
+  resource: saral2
+  credentials:
+    secret: 615fda5f-e52e-4176-9d7b-8f7fa10963aa
+  use-resource-role-mappings: true
+
+  securityConstraints:
+    - authRoles:
+      - user
+      securityCollections:
+      - name: saral
+        patterns:
+        - "/api/*"

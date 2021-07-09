@@ -11,7 +11,7 @@ logging:
         security.oauth2: INFO
 
 security:
-    jksUri: "http://localhost:8080/auth/realms/saral/protocol/openid-connect/certs"
+    jksUri: "http://localhost:8180/auth/realms/saral/protocol/openid-connect/certs"
     publicKey:
     secretKey: "1234"
     introspectUri:
@@ -23,7 +23,7 @@ security:
     # Options are "secret", "publicKey" or "keySet"
     jwtDecoder: "keySet"
     # issuer as it should be in the JWT Token claim iss:
-    issuerUri: "http://localhost:8080/auth/realms/saral"
+    issuerUri: "http://localhost:8180/auth/realms/saral"
 
 spring:
 #  security:

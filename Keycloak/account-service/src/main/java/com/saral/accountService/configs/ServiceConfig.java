@@ -37,6 +37,9 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
     @Value("${security.issuerUri}")
     private String issuerUri;
 
+    @Value("${security.audience}")
+    private String audience;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -49,8 +52,8 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
         }
 
         http.authorizeRequests()
-            .mvcMatchers("/accounts")
-            .hasAuthority("SCOPE_read")
+        //    .mvcMatchers("/accounts")
+        //    .hasAuthority("SCOPE_read")
             .anyRequest().authenticated();
     }
 
@@ -84,7 +87,13 @@ public class ServiceConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public JwtDecoder decoder() {
-        return JwtDecoderFactory.getDecoder(jwtDecoder, secretKey, publicKey, jksUri, issuerUri);
+        return JwtDecoderFactory.getDecoder(jwtDecoder,
+                                            secretKey,
+                                            publicKey,
+                                            jksUri,
+                                            issuerUri,
+                                            audience
+        );
     }
 
 

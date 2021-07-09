@@ -23,7 +23,8 @@ security:
     # Options are "secret", "publicKey" or "keySet"
     jwtDecoder: "keySet"
     # issuer as it should be in the JWT Token claim iss:
-    issuerUri: "http://localhost:8180/auth/realms/saral"
+    issuerUri: "http://127.0.0.1:8180/auth/realms/saral"
+    audience: saral2
 
 spring:
 #  security:

@@ -30,7 +30,8 @@ public class AccountService extends ResponseService<Response<List<AccountDto>>>{
                 .getContext()
                 .getAuthentication();
 
-        String user = (String) authentication.getTokenAttributes().get("user_name");
+        String user = "rid";
+        //String user = (String) authentication.getTokenAttributes().get("user_name");
 
         Iterable<Account> accounts = Optional
                 .ofNullable(accountRepo.findAllById(List.of(user)))

@@ -21,7 +21,9 @@ public class JwtDecoderFactory {
                                               String secretKey,
                                               String publicKey,
                                               String jksUri,
-                                              String issuerUri){
+                                              String issuerUri,
+                                              String audience
+    ){
 
 
         NimbusJwtDecoder nimbusJwtDecoder =  null;
@@ -29,7 +31,7 @@ public class JwtDecoderFactory {
                 new JwtTimestampValidator(Duration.ofSeconds(60)),
                 new JwtIssuerValidator(issuerUri));
 
-        OAuth2TokenValidator<Jwt> audienceValidator = audienceValidator();
+        OAuth2TokenValidator<Jwt> audienceValidator = audienceValidator(audience);
         OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuerUri);
         OAuth2TokenValidator<Jwt> withAudience = new DelegatingOAuth2TokenValidator<>(withIssuer, audienceValidator);
 
@@ -73,8 +75,8 @@ public class JwtDecoderFactory {
         return (RSAPublicKey) keyFactory.generatePublic(x509);
     }
 
-    private static OAuth2TokenValidator<Jwt> audienceValidator() {
-        return new JwtClaimValidator<List<String>>("aud", aud -> aud.contains("saral"));
+    private static OAuth2TokenValidator<Jwt> audienceValidator(String audience) {
+        return new JwtClaimValidator<List<String>>("aud", aud -> aud.contains(audience));
     }
 }
 

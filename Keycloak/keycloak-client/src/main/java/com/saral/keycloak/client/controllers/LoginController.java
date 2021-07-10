@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class LoginController {
 
-    @GetMapping("/api/login")
+    @GetMapping("/v1/dashboard")
     private TokenInfoDto login(KeycloakPrincipal principal){
        // KeycloakPrincipal principal = (KeycloakPrincipal)request.getUserPrincipal();
         var context = (RefreshableKeycloakSecurityContext) principal

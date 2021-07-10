@@ -17,4 +17,4 @@ keycloak:
       securityCollections:
       - name: saral
         patterns:
-        - "/api/*"
+        - "/v1/*"

@@ -3,12 +3,12 @@ server:
 
 logging:
   level:
-    root: INFO
+    root: DEBUG
     org:
       springframework:
-        web: INFO
-        security: INFO
-        security.oauth2: INFO
+        web: DEBUG
+        security: DEBUG
+        security.oauth2: DEBUG
 
 security:
     jksUri: "http://localhost:8180/auth/realms/saral/protocol/openid-connect/certs"

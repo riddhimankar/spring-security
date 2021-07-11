@@ -18,3 +18,8 @@ keycloak:
       - name: saral
         patterns:
         - "/v1/*"
+
+service:
+  accounts:
+    baseUri: "http://localhost:9001"
+    api: "/accounts"

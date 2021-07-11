@@ -1,5 +1,7 @@
 package com.saral.keycloak.client.dtos;
 
+import java.util.Arrays;
+
 public class TokenInfoDto {
 
     private final String accessToken;
@@ -72,6 +74,13 @@ public class TokenInfoDto {
         return username;
     }
 
+    @Override
+    public String toString() {
+        return "TokenInfoDto{" + "accessToken='" + accessToken + '\'' + ", expiresIn=" + expiresIn + ", refreshToken='" + refreshToken + '\'' + ", tokenType='" + tokenType + '\'' + ", notBeforePolicy=" + notBeforePolicy + ", sessionState='" + sessionState + '\'' + ", scope='" + scope + '\'' + ", audience=" + Arrays.toString(
+                audience) + ", authTime=" + authTime + ", issuedFor='" + issuedFor + '\'' + ", " +
+                "username='" + username + '\'' + '}';
+    }
+
     public static class Builder {
         private String accessToken;
         private long expiresIn;
@@ -89,7 +98,7 @@ public class TokenInfoDto {
             return new Builder();
         }
 
-        public Builder setAccessToken(String accessToken) {
+        public TokenInfoDto.Builder setAccessToken(String accessToken) {
             this.accessToken = accessToken;
             return this;
         }

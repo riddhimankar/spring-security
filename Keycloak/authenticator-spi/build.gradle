@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'com.saral.spi.authenticator'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'org.keycloak:keycloak-core:14.0.0'
+
+    compileOnly 'org.keycloak:keycloak-services:14.0.0'
+    compileOnly 'org.keycloak:keycloak-server-spi-private:14.0.0'
+    compileOnly 'org.keycloak:keycloak-server-spi:14.0.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
